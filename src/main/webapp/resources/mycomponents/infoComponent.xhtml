@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- INTERFACE -->
+    <composite:interface>
+    </composite:interface>
+
+    <!-- IMPLEMENTATION -->
+    <composite:implementation>
+        
+        <h:panelGroup layout="block" id="infoArea" class="infoArea">
+                        <h2>#{searchBean.searchTerm}</h2>
+                        
+                        <div id="description" class="description">#{searchBean.getDescription()} <a href="http://en.wikipedia.org/wiki/#{searchBean.searchTerm}" rendered="#{searchBean.descriptionAvailable()}">Wikipedia</a></div>
+                        
+                        <table summary="#{msg.infotable}" class="table">
+                            <tr>                    
+                                <th id="countryLabel" class="label">#{msg.country}</th>
+                                <td id="country" class="data">#{searchBean.country}</td>
+                            </tr>
+                            <tr>
+                                <th id="areaLabel" class="label">#{msg.area}</th>
+                                <td id="area" class="data">#{searchBean.area}</td>
+                            </tr>
+                            <tr>
+                                <th id="populationLabel" class="label">#{msg.population}</th>
+                                <td id="population" class="data">#{searchBean.population} <em>#{searchBean.populationDate}</em></td>
+                            </tr>  	      	      	    
+                        </table>   
+                    </h:panelGroup>
+        
+
+        
+    </composite:implementation>
+</html>

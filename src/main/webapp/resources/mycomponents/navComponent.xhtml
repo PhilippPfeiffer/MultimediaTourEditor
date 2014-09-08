@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://xmlns.jcp.org/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <composite:interface>
+        <composite:attribute name="searchTerm" required="false"/>
+        <composite:attribute name="action" method-signature="java.lang.String f()" required="true"/>
+    </composite:interface>
+
+    <!-- IMPLEMENTATION -->
+    <composite:implementation>
+        
+        <h:panelGroup layout="block" id="msg_searchError" class="validation_error hide" >#{msg.error}</h:panelGroup>
+        <h:form id="navForm" class="rightGrid">
+            <h:panelGroup layout="block" class="editorLanguageArea">
+                <h:commandButton id="german" value="Deutsch" action="#{searchBean.setGerman()}" image="resources/img/Germany.png" class="languageIcon">
+                </h:commandButton>
+                <h:commandButton id="english" value="English" action="#{searchBean.setEnglish()}" image="resources/img/UK.png" class="languageIcon">
+                </h:commandButton>
+            </h:panelGroup>  
+            <h:panelGroup layout="block" class="element">
+                <h:outputLabel value="#{msg.searchTerm}: " for="name"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="element">
+                <h:inputText id="searchTerm" value="#{cc.attrs.searchTerm}"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="element">
+                <h:commandButton id="submit" value="#{msg.search}" action="#{cc.attrs.action}"/>
+                <h:panelGroup id="loading" layout="block" class="editorLoader" >
+                    <h:graphicImage value="resources/img/loading.gif" class="indexLoader" alt="loadingAnimation" style="display:none;"/>
+                </h:panelGroup>
+            </h:panelGroup>
+           
+        </h:form>
+        
+        <script type="text/javascript">
+                        (function (d) {
+                            d.getElementById('navComponent:form').onsubmit = function () {
+                                d.getElementById('navComponent:form:submit').style.display = 'none';
+                                d.getElementById('navComponent:form:loading').style.display = 'block';
+                            };
+                        }(document));
+                    </script>
+    </composite:implementation>
+</html>
