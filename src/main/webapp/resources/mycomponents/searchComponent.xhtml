@@ -1,26 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--© Copyright 2014, Philipp Pfeiffer
 
-    This file is part of Multimedia Tour Editor.
-
-    Multimedia Tour Editor is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Multimedia Tour Editor is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Multimedia Tour Editor.  If not, see <http://www.gnu.org/licenses/>. -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:composite="http://xmlns.jcp.org/jsf/composite"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
 
     <!-- INTERFACE -->
     <composite:interface>
@@ -41,7 +25,7 @@
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="right">
                         <h:commandButton id="submit" value="#{msg.search}" action="#{cc.attrs.action}"/>
-                        <h:panelGroup id="loading" layout="block" class="indexLoader" style="display:none">
+                        <h:panelGroup id="loading" layout="block" class="indexLoaderContainer">
                             <h:graphicImage value="resources/img/loading.gif" class="indexLoader" alt="loadingAnimation"   />
                         </h:panelGroup>
                     </h:panelGroup>
@@ -61,33 +45,6 @@
                        
             
         </h:form>
-        
-        <script src="js/jquery.js" type="text/javascript">
-                    
-                    document.getElementById("searchComponent:form:submit").disabled=true;
-                    
-                    $( document ).ready(function() {
-                        $("#searchComponent:form:submit").attr('disabled', 'disabled');
-                    });
-                    
-                
 
-                $("#searchTerm").keyup(function() {
-                    re = /^[a-zA-Z\s]*$/;
-                    if ($("#searchTerm").val() != '') {
-                        if ($("#searchTerm").val().match(re)) {
-                            $("#test").removeAttr('disabled');
-                            $("#searchTerm").css({'background-color': 'white'});
-                            $("#msg_searchError").addClass('hide');
-                     } else {
-                            $("#test").attr('disabled', 'disabled');
-                            $("#searchTerm").css({'background-color': 'red'});
-                            $("#msg_searchError").removeClass('hide');
-                      }
-                    }
-                });
-            
-        </script>
-        
     </composite:implementation>
 </html>
