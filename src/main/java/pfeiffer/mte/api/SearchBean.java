@@ -414,7 +414,7 @@ public class SearchBean {
         }
         
         //Photos are added to the places
-        addPhotos();
+        //addPhotos();
              
         //Separate lists for onRoute and offRoute purposes are built
         onRouteList = placesList.buildOnRouteList(10);

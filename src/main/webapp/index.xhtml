@@ -7,7 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:view locale="#{searchBean.getLocale()}">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Multimedia Tour Editor</title>
         <script src="js/jquery.js" type="text/javascript"></script>
     </h:head>
     <h:body>
@@ -17,22 +17,17 @@
                 <mc:searchComponent id="searchComponent" searchTerm="#{searchBean.searchTerm}" action="#{searchBean.search()}"/>
             </ui:define>
             
+            <ui:define name="title">
+                <h:panelGroup layout="block" class="indexTitle"><h1>Multimedia Tour Editor</h1></h:panelGroup>
+            </ui:define>
+            
             <ui:define name="message">
-                <div id="loading" style="display:none;"><img src="resources/img/loading.gif" alt="" /></div>
                 <h:messages styleClass="errorMessage" />            
             </ui:define>
             
 
 
         </ui:composition>
-                    <script type="text/javascript">
-                        (function (d) {
-                            d.getElementById('searchComponent:form').onsubmit = function () {
-                                d.getElementById('searchComponent:form:submit').style.display = 'none';
-                                d.getElementById('searchComponent:form:loading').style.display = 'block';
-                            };
-                        }(document));
-                    </script>
        
     </h:body>
     </f:view>

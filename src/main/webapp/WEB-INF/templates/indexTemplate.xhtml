@@ -6,25 +6,23 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <h:outputStylesheet library="styles" name="style.css"/>
         <title>Multimedia Tour Editor</title>
     </h:head>
 
     <h:body>
         
+
+        <div id="title" class="title">
+            <ui:insert name="title"></ui:insert>
+        </div>
+        <div id="message" class="indexErrorMessage">
+            <ui:insert name="message"></ui:insert>
+        </div>
         <div id="content" class="indexControlArea">
             <ui:insert name="content"></ui:insert>
         </div>
         
-        <div id="message" class="indexErrorMessage">
-            <ui:insert name="message"></ui:insert>
-        </div>
-
-        <div id="bottom" class="footer">
-            <ui:insert name="bottom"></ui:insert>
-        </div>
 
     </h:body>
 

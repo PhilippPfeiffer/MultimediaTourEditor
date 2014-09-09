@@ -15,6 +15,7 @@
     <composite:implementation>
         
         <h:panelGroup layout="block" id="msg_searchError" class="validation_error hide" >#{msg.error}</h:panelGroup>
+        <h:panelGroup layout="block" class="editorTitle"><h1>Multimedia Tour Editor</h1></h:panelGroup>
         <h:form id="navForm" class="rightGrid">
             <h:panelGroup layout="block" class="editorLanguageArea">
                 <h:commandButton id="german" value="Deutsch" action="#{searchBean.setGerman()}" image="resources/img/Germany.png" class="languageIcon">
@@ -30,20 +31,9 @@
             </h:panelGroup>
             <h:panelGroup layout="block" class="element">
                 <h:commandButton id="submit" value="#{msg.search}" action="#{cc.attrs.action}"/>
-                <h:panelGroup id="loading" layout="block" class="editorLoader" >
-                    <h:graphicImage value="resources/img/loading.gif" class="indexLoader" alt="loadingAnimation" style="display:none;"/>
-                </h:panelGroup>
             </h:panelGroup>
            
         </h:form>
         
-        <script type="text/javascript">
-                        (function (d) {
-                            d.getElementById('navComponent:form').onsubmit = function () {
-                                d.getElementById('navComponent:form:submit').style.display = 'none';
-                                d.getElementById('navComponent:form:loading').style.display = 'block';
-                            };
-                        }(document));
-                    </script>
     </composite:implementation>
 </html>
