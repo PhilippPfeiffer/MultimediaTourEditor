@@ -113,6 +113,7 @@ public class FreebaseSearchClient {
       try{
           org.json.JSONArray descriptionArray = descriptionObj.getJSONArray("/common/topic/description");
           String description = descriptionArray.getString(0);
+          description = description.replace("\n", "");
           wiki.setDescription(description, true);
       } catch (Exception ex) {
         wiki.setDescription("No data found", false);

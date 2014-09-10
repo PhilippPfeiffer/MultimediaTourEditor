@@ -25,6 +25,19 @@
     <h:head>
         <title>Multimedia Tour Editor</title>
         <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="resources/js/mespeak/mespeak.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function speak() {
+                meSpeak.speak("#{searchBean.getFullDescription()}");
+                meSpeak.loadConfig("resources/js/mespeak/mespeak_config.json");
+                meSpeak.loadVoice("resources/js/mespeak/voices/en/en-us.json"); 
+            }
+            
+            function stop() {
+                meSpeak.stop();
+            }
+            
+        </script>
     </h:head>
    
         <ui:composition xmlns="http://www.w3.org/1999/xhtml"

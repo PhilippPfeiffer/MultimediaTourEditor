@@ -709,6 +709,17 @@ public class SearchBean {
     }
     
     /**
+     * Returns the full, unshortened description from the wiki.
+     * @return String of the full description
+     */
+    public String getFullDescription() {
+        if(!descriptionAvailable()) {
+            return "";
+        }
+        return wiki.getFullDescription();
+    }
+    
+    /**
      * Returns HTML Attributions for a photo of a specified place. PlaceIndex
      * is the index of the place within onRouteList and photoIndex is the index
      * of the photo belonging to the place.

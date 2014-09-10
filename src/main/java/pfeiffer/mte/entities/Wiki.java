@@ -29,6 +29,7 @@ public class Wiki {
     private String country;
     private String population;
     private String description;
+    private String fullDescription;
     private String populationDate;
     
     /**
@@ -38,6 +39,7 @@ public class Wiki {
      * @param shorten 
      */
     public void setDescription(String description, boolean shorten) {
+        this.fullDescription = description;
         if(shorten) {
             description = shortenWikiText(description,300);
         }
@@ -126,5 +128,13 @@ public class Wiki {
         String shortString = longString.substring(0, length);
         shortString += "...";
         return shortString;
+    }
+    
+    /**
+     * Returns the full, unshortened Description
+     * @return String of full Description
+     */
+    public String getFullDescription() {
+        return fullDescription;
     }
 }
