@@ -57,6 +57,8 @@
                 <h:panelGroup layout="block" id="refreshScript" class="script">
                     <h:outputScript>
                         
+                        //<![CDATA[
+                        
                         var directionsService = new google.maps.DirectionsService(); 
                         var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});        //Create a DirectionsRenderer object to render the directions results
                         directionsDisplay.suppressMarkers = true;
@@ -396,6 +398,7 @@
                         document.getElementById("navComponent:form:submit").disabled=true;
                     }
                         
+                    //]]>
                         
                     </h:outputScript>
                 </h:panelGroup>
