@@ -360,11 +360,13 @@ icon {
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
 }
+
 .thumbnailContainer {
     vertical-align: top;
     display: inline-block;
     *display: inline;
     zoom: 1;
+    position: relative;
 }
 .stretch {
     width: 100%;
@@ -431,7 +433,21 @@ icon {
     margin-bottom: 5px;
 }
 
+.popUpAttribution {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin-bottom: 5px;
+}
+
 .attribution a{
+    font-size: 75%;
+    color: white; 
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.popUpAttribution a{
     font-size: 75%;
     color: white; 
     background: rgb(0, 0, 0);
