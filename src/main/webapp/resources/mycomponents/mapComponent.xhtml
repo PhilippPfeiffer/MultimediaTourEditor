@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:composite="http://xmlns.jcp.org/jsf/composite"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
       
 
@@ -15,29 +14,8 @@
     <!-- IMPLEMENTATION -->
     <composite:implementation>
         
-            <h:head>
-                <title>Map</title>
-                <script type="text/javascript" charset="utf-8" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-                <h:panelGroup layout="block" id="script" class="script"> 
-                <script type="text/javascript">
-                    var directionsDisplay;
-                    var directionsService = new google.maps.DirectionsService();     //Create a DirectionsService object which is required to communicate with the Google Maps API Direction Service
-                    var map;
-                    var markerArray = [];
-                    var stepDisplay;
-                    var placeNames = [];
-                    var placesAddresses = [];
-                    var letters = [];
-                    
-                    function disableSearch() {
-                        document.getElementById("navComponent:form:submit").disabled=true;
-                    }
-
-                    </script>
-                </h:panelGroup>
-               </h:head>
             <h:form id="refreshForm">
-            <h:body id="script3">
+            
                 <h:commandButton id="walking" value="#{msg.walking}" action="#{searchBean.setWalking()}" image="#{resource[searchBean.getWalkingButton()]}" class="travelMode">
                                         <f:ajax render="refreshScript walking bicycling driving" />
                 </h:commandButton>
@@ -58,8 +36,6 @@
                                     <f:ajax/>
                 </h:commandButton>
                 </h:panelGroup>
-                
-                
                 
                 <div id="map_canvas" class="map"></div>
                 
@@ -411,7 +387,6 @@
                         
                     </h:outputScript>
                 </h:panelGroup>
-            </h:body>
             </h:form>
         
 

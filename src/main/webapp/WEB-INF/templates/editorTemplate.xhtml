@@ -32,17 +32,21 @@
             <ui:insert name="navArea"></ui:insert>
         </div>
         
-        <div id="left" class="mapArea"> 
-            <ui:insert name="mapArea"></ui:insert>
+        <div id="main" class="mainArea">
+            <div id="left" class="mapArea"> 
+                <ui:insert name="mapArea"></ui:insert>
+            </div>
+        
+            <div id="right" class="rightArea">
+                <ui:insert name="rightArea"></ui:insert>
+            </div>
+        
+            <div id="placeImageArea" class="placeImageArea">
+                <ui:insert name="placeImageArea"></ui:insert>
+            </div>
         </div>
         
-        <div id="right" class="rightArea">
-            <ui:insert name="rightArea"></ui:insert>
-        </div>
         
-        <div id="placeImageArea" class="placeImageArea">
-            <ui:insert name="placeImageArea"></ui:insert>
-        </div>
 
     </h:body>
 
