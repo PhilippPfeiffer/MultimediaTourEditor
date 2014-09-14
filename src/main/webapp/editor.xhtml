@@ -26,6 +26,7 @@
         <title>Multimedia Tour Editor</title>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="resources/js/mespeak/mespeak.js" type="text/javascript"></script>
+        <script type="text/javascript" charset="utf-8" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript">
             function speak() {
                 meSpeak.speak("#{searchBean.getFullDescription()}");
@@ -36,15 +37,28 @@
             function stop() {
                 meSpeak.stop();
             }
-            
+                    var directionsDisplay;
+                    var directionsService = new google.maps.DirectionsService();     //Create a DirectionsService object which is required to communicate with the Google Maps API Direction Service
+                    var map;
+                    var markerArray = [];
+                    var stepDisplay;
+                    var placeNames = [];
+                    var placesAddresses = [];
+                    var letters = [];
+                    
+                    function disableSearch() {
+                        document.getElementById("navComponent:form:submit").disabled=true;
+                    }
         </script>
     </h:head>
-   
-        <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                        template="/WEB-INF/templates/editorTemplate.xhtml">
-            
         
+        <h:body>
+
+        <ui:composition template="/WEB-INF/templates/editorTemplate.xhtml">
+            
+            <ui:define name="main">
+            </ui:define>
+
             <ui:define name="navArea">
                 <mc:navComponent id="navComponent" searchTerm="#{searchBean.searchTerm}" action="#{searchBean.search()}"/> 
                 <h:messages id="search_messages" for="searchTerm" errorClass="error" showDetail="true" showSummary="false"/>
@@ -282,6 +296,7 @@
             </ui:define>
             
         </ui:composition>
+            </h:body>
         </f:view>
 </html>
 
