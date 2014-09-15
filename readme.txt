@@ -24,3 +24,4 @@ Deployment:
 -) Deploy using IDE (e.g. Netbeans).
 -) Build the project using your IDE and deploy the resulting WAR file to
 a server (e.g. Glassfish).
+-) Once deployed, open browser and go to http://localhost:8080/MTE/faces/index.xhtml
