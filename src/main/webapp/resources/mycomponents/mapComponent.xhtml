@@ -87,70 +87,70 @@
                             var lat0 = "#{searchBean.getPlaceLat(0)}";
                             var lng0 = "#{searchBean.getPlaceLng(0)}";
                             var name0 = "#{searchBean.getPlaceName(0)}";
-                            waypoints[0] = new google.maps.LatLng(lat0, lng0); 
+                            waypoints[0] = "#{searchBean.getPlaceAddress(0)}"; 
                             placeNames[0] = name0;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute1)}) {
                             var lat1 = "#{searchBean.getPlaceLat(1)}";
                             var lng1 = "#{searchBean.getPlaceLng(1)}";
                             var name1 = "#{searchBean.getPlaceName(1)}";
-                            waypoints[1] = new google.maps.LatLng(lat1, lng1); 
+                            waypoints[1] = "#{searchBean.getPlaceAddress(1)}"; 
                             placeNames[1] = name1;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute2)}) {
                             var lat2 = "#{searchBean.getPlaceLat(2)}";
                             var lng2 = "#{searchBean.getPlaceLng(2)}";
                             var name2 = "#{searchBean.getPlaceName(2)}";
-                            waypoints[2] = new google.maps.LatLng(lat2, lng2); 
+                            waypoints[2] = "#{searchBean.getPlaceAddress(2)}"; 
                             placeNames[2] = name2;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute3)}) {
                             var lat3 = "#{searchBean.getPlaceLat(3)}";
                             var lng3 = "#{searchBean.getPlaceLng(3)}";
                             var name3 = "#{searchBean.getPlaceName(3)}";
-                            waypoints[3] = new google.maps.LatLng(lat3, lng3); 
+                            waypoints[3] = "#{searchBean.getPlaceAddress(3)}"; 
                             placeNames[3] = name3;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute4)}) {
                             var lat4 = "#{searchBean.getPlaceLat(4)}";
                             var lng4 = "#{searchBean.getPlaceLng(4)}";
                             var name4 = "#{searchBean.getPlaceName(4)}";
-                            waypoints[4] = new google.maps.LatLng(lat4, lng4); 
+                            waypoints[4] = "#{searchBean.getPlaceAddress(4)}"; 
                             placeNames[4] = name4;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute5)}) {
                             var lat5 = "#{searchBean.getPlaceLat(5)}";
                             var lng5 = "#{searchBean.getPlaceLng(5)}";
                             var name5 = "#{searchBean.getPlaceName(5)}";
-                            waypoints[5] = new google.maps.LatLng(lat5, lng5); 
+                            waypoints[5] = "#{searchBean.getPlaceAddress(5)}"; 
                             placeNames[5] = name5;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute6)}) {
                             var lat6 = "#{searchBean.getPlaceLat(6)}";
                             var lng6 = "#{searchBean.getPlaceLng(6)}";
                             var name6 = "#{searchBean.getPlaceName(6)}";
-                            waypoints[6] = new google.maps.LatLng(lat6, lng6); 
+                            waypoints[6] = "#{searchBean.getPlaceAddress(6)}"; 
                             placeNames[6] = name6;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute7)}) {
                             var lat7 = "#{searchBean.getPlaceLat(7)}";
                             var lng7 = "#{searchBean.getPlaceLng(7)}";
                             var name7 = "#{searchBean.getPlaceName(7)}";
-                            waypoints[7] = new google.maps.LatLng(lat7, lng7); 
+                            waypoints[7] = "#{searchBean.getPlaceAddress(7)}"; 
                             placeNames[7] = name7;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute8)}) {
                             var lat8 = "#{searchBean.getPlaceLat(8)}";
                             var lng8 = "#{searchBean.getPlaceLng(8)}";
                             var name8 = "#{searchBean.getPlaceName(8)}";
-                            waypoints[8] = new google.maps.LatLng(lat8, lng8); 
+                            waypoints[8] = "#{searchBean.getPlaceAddress(8)}"; 
                             placeNames[8] = name8;
                         }
                         if(#{searchBean.isPlaceVisible(onRoute9)}) {
                             var lat9 = "#{searchBean.getPlaceLat(9)}";
                             var lng9 = "#{searchBean.getPlaceLng(9)}";
                             var name9 = "#{searchBean.getPlaceName(9)}";
-                            waypoints[9] = new google.maps.LatLng(lat9, lng9); 
+                            waypoints[9] = "#{searchBean.getPlaceAddress(9)}"; 
                             placeNames[9] = name9;
                         }
                         
@@ -312,6 +312,10 @@
                                     directionsDisplay.setMap(map);
                                     directionsDisplay.setDirections(response);
                                     showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
+                                }
+                                else if (status == google.maps.DirectionsStatus.ZERO_RESULTS)
+                                {
+                                    alert("ZERO_RESULTS");
                                 }
                         });
                         }
