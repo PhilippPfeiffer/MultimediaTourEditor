@@ -247,18 +247,102 @@ h2 {
     border-radius: 10px;
     box-shadow: 3px 3px 2px 2px #ccc;
     -webkit-column-count: 3;
-    -webkit-column-gap:   5px;
+    -webkit-column-gap:   6px;
     -moz-column-count:    3;
-    -moz-column-gap:      5px;
+    -moz-column-gap:      6px;
     column-count:         3;
-    column-gap:           5px;
+    column-gap:           6px;
     overflow-y: hidden;
     overflow-x: hidden;
+    padding-right: 6px;
 }
 
-.placePhoto {
+.placePhoto_A {
     width: 100%;
     height: auto;
+    border-style: solid;
+    border-color: #4b48e8;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_B {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #a648e8;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_C {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #e848ce;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_D {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #e8485e;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_E {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #e88848;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_F {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #e8bd48;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_G {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #74e848;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_H {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #48e8bb;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_I {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #48a4e8;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.placePhoto_J {
+    width: 100%;
+    height: auto;
+    border-style: solid;
+    border-color: #989898;
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
@@ -477,4 +561,105 @@ h1 {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+.imageLabel_A {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #4b48e8;
+}
+
+.imageLabel_B {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #a648e8;
+}
+
+.imageLabel_C {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #e848ce;
+}
+
+.imageLabel_D {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #e8485e;
+}
+
+.imageLabel_E {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #e88848;
+}
+
+.imageLabel_F {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #e8bd48;
+}
+
+.imageLabel_G {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #74e848;
+}
+
+.imageLabel_H {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #48e8bb;
+}
+
+.imageLabel_I {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #48a4e8;
+}
+
+.imageLabel_J {
+    position: absolute;
+    left: 2px; 
+    top: 2px;
+    color: white; 
+    background: #989898;
+}
+
+.routeLengthContainer {
+    margin-left: 30px;
+    float: left;
+}
+
+.distanceContainer {
+    font-size: 75%;
+}
+
+.durationContainer {
+    font-size: 75%;
+}
+
+.distanceLabel {
+    font-weight: bold;
+}
+
+.durationLabel {
+    font-weight: bold;
 }

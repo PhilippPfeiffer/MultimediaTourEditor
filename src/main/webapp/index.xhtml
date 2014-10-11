@@ -38,12 +38,14 @@
         </ui:composition>
         
         <script type="text/javascript">
-                        (function (d) {
-                            d.getElementById('searchComponent:form').onsubmit = function () {
-                                d.getElementById('searchComponent:form:submit').style.display = 'none';
-                                d.getElementById('searchComponent:form:loading').style.display = 'block';
-                            };
-                        }(document));
+            //<![CDATA[
+            (function (d) {
+                d.getElementById('searchComponent:form').onsubmit = function () {
+                d.getElementById('searchComponent:form:submit').style.display = 'none';
+                d.getElementById('searchComponent:form:loading').style.display = 'block';
+             };
+             }(document));
+           //]]>
         </script>
     </h:body>
     </f:view>

@@ -114,8 +114,10 @@ public class GooglePlacesClient implements Serializable{
                 place.setReference(predsJsonArray.getJSONObject(i).getString("reference"));
                 place.setIcon(predsJsonArray.getJSONObject(i).getString("icon"));
                 String name = new String(predsJsonArray.getJSONObject(i).getString("name").getBytes("ISO-8859-1"), "UTF-8");
+                name = cleanString(name);
                 place.setName(name);
                 String formattedAddress = new String(predsJsonArray.getJSONObject(i).getString("formatted_address").getBytes("ISO-8859-1"), "UTF-8");
+                formattedAddress = cleanString(formattedAddress);
                 place.setFormattedAddress(formattedAddress);
                 JSONObject geometryObject = (predsJsonArray.getJSONObject(i).getJSONObject("geometry"));
                 JSONObject locationObject = (geometryObject.getJSONObject("location"));
@@ -394,6 +396,18 @@ public class GooglePlacesClient implements Serializable{
         } 
         
         return place;
+    }
+    
+    /**
+     * cleans a String of special characters like double quotes.
+     * @param string
+     * @return cleaned String
+     */
+    private static String cleanString(String string) {
+        string = string.replaceAll("\"", "");
+        string = string.replaceAll("ß", "ss");
+        
+        return string;
     }
     
     

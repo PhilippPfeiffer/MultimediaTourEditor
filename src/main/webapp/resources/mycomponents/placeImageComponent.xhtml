@@ -14,85 +14,105 @@
         
         <h:panelGroup layout="block" id="innerPlaceImageArea" class="innerPlaceImageArea">
             
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(0)}" class="placePhoto" rendered="#{searchBean.imageRendered(0)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(0)}">
+                <h:graphicImage value="#{searchBean.getImageURL(0)}" class="placePhoto_A" rendered="#{searchBean.imageRendered(0)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(0,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" A " class="imageLabel_A"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(1)}" class="placePhoto" rendered="#{searchBean.imageRendered(1)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(1)}">
+                <h:graphicImage value="#{searchBean.getImageURL(1)}" class="placePhoto_B" rendered="#{searchBean.imageRendered(1)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(1,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" B " class="imageLabel_B"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(2)}" class="placePhoto" rendered="#{searchBean.imageRendered(2)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(2)}">
+                <h:graphicImage value="#{searchBean.getImageURL(2)}" class="placePhoto_C" rendered="#{searchBean.imageRendered(2)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(2,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" C " class="imageLabel_C"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(3)}" class="placePhoto" rendered="#{searchBean.imageRendered(3)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(3)}">
+                <h:graphicImage value="#{searchBean.getImageURL(3)}" class="placePhoto_D" rendered="#{searchBean.imageRendered(3)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(3,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" D " class="imageLabel_D"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(4)}" class="placePhoto" rendered="#{searchBean.imageRendered(4)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(4)}">
+                <h:graphicImage value="#{searchBean.getImageURL(4)}" class="placePhoto_E" rendered="#{searchBean.imageRendered(4)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(4,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" E " class="imageLabel_E"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(5)}" class="placePhoto" rendered="#{searchBean.imageRendered(5)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(5)}">
+                <h:graphicImage value="#{searchBean.getImageURL(5)}" class="placePhoto_F" rendered="#{searchBean.imageRendered(5)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(5,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" F " class="imageLabel_F"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(6)}" class="placePhoto" rendered="#{searchBean.imageRendered(6)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(6)}">
+                <h:graphicImage value="#{searchBean.getImageURL(6)}" class="placePhoto_G" rendered="#{searchBean.imageRendered(6)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(6,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" G " class="imageLabel_G"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(7)}" class="placePhoto" rendered="#{searchBean.imageRendered(7)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(7)}">
+                <h:graphicImage value="#{searchBean.getImageURL(7)}" class="placePhoto_H" rendered="#{searchBean.imageRendered(7)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(7,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" H " class="imageLabel_H"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(8)}" class="placePhoto" rendered="#{searchBean.imageRendered(8)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(8)}">
+                <h:graphicImage value="#{searchBean.getImageURL(8)}" class="placePhoto_I" rendered="#{searchBean.imageRendered(8)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(8,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" I " class="imageLabel_I"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getImageURL(9)}" class="placePhoto" rendered="#{searchBean.imageRendered(9)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.imageRendered(9)}">
+                <h:graphicImage value="#{searchBean.getImageURL(9)}" class="placePhoto_J" rendered="#{searchBean.imageRendered(9)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(9,0)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" J " class="imageLabel_J"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(0)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(0)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(0)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(0)}" class="placePhoto_A" rendered="#{searchBean.secondImageRendered(0)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(0,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" A " class="imageLabel_A"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(1)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(1)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(1)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(1)}" class="placePhoto_B" rendered="#{searchBean.secondImageRendered(1)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(1,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" B " class="imageLabel_B"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(2)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(2)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(2)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(2)}" class="placePhoto_C" rendered="#{searchBean.secondImageRendered(2)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(2,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" C " class="imageLabel_C"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(3)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(3)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(3)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(3)}" class="placePhoto_D" rendered="#{searchBean.secondImageRendered(3)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(3,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" D " class="imageLabel_D"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(4)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(4)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(4)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(4)}" class="placePhoto_E" rendered="#{searchBean.secondImageRendered(4)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(4,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" E " class="imageLabel_E"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(5)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(5)}"></h:graphicImage> 
-                <h:outputText value="" escape="false" class="attribution">#{searchBean.getHtmlAttributions(5,1)}</h:outputText>
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(5)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(5)}" class="placePhoto_F" rendered="#{searchBean.secondImageRendered(5)}"></h:graphicImage> 
+                <h:outputText value="#{searchBean.getHtmlAttributions(5,1)}" escape="false" class="attribution">#{searchBean.getHtmlAttributions(5,1)}</h:outputText>
+                <h:outputText value=" F " class="imageLabel_F"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(6)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(6)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(6)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(6)}" class="placePhoto_G" rendered="#{searchBean.secondImageRendered(6)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(6,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" G " class="imageLabel_G"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(7)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(7)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(7)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(7)}" class="placePhoto_H" rendered="#{searchBean.secondImageRendered(7)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(7,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" H " class="imageLabel_H"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(8)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(8)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(8)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(8)}" class="placePhoto_I" rendered="#{searchBean.secondImageRendered(8)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(8,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" I " class="imageLabel_I"></h:outputText>
             </h:panelGroup>
-            <h:panelGroup layout="block" class="imageContainer">
-                <h:graphicImage value="#{searchBean.getSecondImageURL(9)}" class="placePhoto" rendered="#{searchBean.secondImageRendered(9)}"></h:graphicImage> 
+            <h:panelGroup layout="block" class="imageContainer" rendered="#{searchBean.secondImageRendered(9)}">
+                <h:graphicImage value="#{searchBean.getSecondImageURL(9)}" class="placePhoto_J" rendered="#{searchBean.secondImageRendered(9)}"></h:graphicImage> 
                 <h:outputText value="#{searchBean.getHtmlAttributions(9,1)}" escape="false" class="attribution"></h:outputText>
+                <h:outputText value=" J " class="imageLabel_J"></h:outputText>
             </h:panelGroup>
                 
         </h:panelGroup >

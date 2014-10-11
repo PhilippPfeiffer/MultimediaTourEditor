@@ -19,8 +19,11 @@
 
 package pfeiffer.mte.api;
 
+import java.io.UnsupportedEncodingException;
 import javax.faces.bean.SessionScoped;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -746,8 +749,23 @@ public class SearchBean {
         if(this.searchTerm.equals("") || this.searchTerm.trim().length() == 0) {
             this.searchTerm = "New York City";
         } else {
-          String newSearchTerm = this.searchTerm.replaceAll("[^a-zA-Z ]", "");
-          this.searchTerm = newSearchTerm.trim();  
+            String newSearchTerm;
+            try {
+                newSearchTerm = new String(searchTerm.getBytes("ISO-8859-1"), "UTF-8");
+                newSearchTerm = newSearchTerm
+                    .replaceAll("ü", "ue")
+                    .replaceAll("ö", "oe")
+                    .replaceAll("ä", "ae")
+                    .replaceAll("ß", "ss")
+                    .replaceAll("Ü", "UE")
+                    .replaceAll("Ö", "OE")
+                    .replaceAll("Ä", "AE");
+                newSearchTerm = newSearchTerm.replaceAll("[^a-zA-Z ]", "");
+                this.searchTerm = newSearchTerm.trim();  
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(SearchBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
         
     }

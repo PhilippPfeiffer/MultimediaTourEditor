@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -37,6 +37,17 @@
                 </h:commandButton>
                 </h:panelGroup>
                 
+                <h:panelGroup layout="block" class="routeLengthContainer" id="routeLengthContainer">
+                    <h:panelGroup layout="block" class="distanceContainer" id="distanceContainer">
+                        <h:outputText value="#{msg.distance}" class="distanceLabel"></h:outputText>
+                        <h:outputText value="0m" id="distance"></h:outputText>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="durationContainer" id="durationContainer">
+                        <h:outputText value="#{msg.duration}" class="durationLabel"></h:outputText>
+                        <h:outputText value="0min" id="duration"></h:outputText>
+                    </h:panelGroup>
+                </h:panelGroup>
+                
                 <div id="map_canvas" class="map"></div>
                 
                 <h:panelGroup layout="block" id="refreshScript" class="script">
@@ -45,9 +56,9 @@
                         //<![CDATA[
                         
                         var directionsService = new google.maps.DirectionsService(); 
-                        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});        //Create a DirectionsRenderer object to render the directions results
+                        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});        
                         directionsDisplay.suppressMarkers = true;
-                        var center = new google.maps.LatLng(0, 0);    //Map is centered at 0,0
+                        var center = new google.maps.LatLng(0, 0);    
                         var myOptions =
                             {
                                 zoom:7,
@@ -251,15 +262,15 @@
                                 destination:end,
                                 waypoints: waypts,
                                 optimizeWaypoints: false,
-                                travelMode: google.maps.DirectionsTravelMode.DRIVING          //Current travel mode is DRIVING. You can change to BICYCLING or WALKING and see the changes.
+                                travelMode: google.maps.DirectionsTravelMode.DRIVING         
                             };
                             
                             directionsService.route(request, function(response, status)
                         {
-                                if (status == google.maps.DirectionsStatus.OK) //Check if request is successful.
+                                if (status == google.maps.DirectionsStatus.OK) 
                                 {
                                     directionsDisplay.setMap(map);
-                                    directionsDisplay.setDirections(response);         //Display the directions result
+                                    directionsDisplay.setDirections(response);        
                                     showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
                                 }
                         });
@@ -271,15 +282,15 @@
                                 destination:end,
                                 waypoints: waypts,
                                 optimizeWaypoints: false,
-                                travelMode: google.maps.DirectionsTravelMode.BICYCLING          //Current travel mode is DRIVING. You can change to BICYCLING or WALKING and see the changes.
+                                travelMode: google.maps.DirectionsTravelMode.BICYCLING         
                             };
                             
                             directionsService.route(request, function(response, status)
                         {
-                                if (status == google.maps.DirectionsStatus.OK) //Check if request is successful.
+                                if (status == google.maps.DirectionsStatus.OK) 
                                 {
                                     directionsDisplay.setMap(map);
-                                    directionsDisplay.setDirections(response);         //Display the directions result
+                                    directionsDisplay.setDirections(response); 
                                     showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
                                 }
                         });
@@ -291,15 +302,15 @@
                                 destination:end,
                                 waypoints: waypts,
                                 optimizeWaypoints: false,
-                                travelMode: google.maps.DirectionsTravelMode.WALKING          //Current travel mode is DRIVING. You can change to BICYCLING or WALKING and see the changes.
+                                travelMode: google.maps.DirectionsTravelMode.WALKING          
                             };
                             
                             directionsService.route(request, function(response, status)
                         {
-                                if (status == google.maps.DirectionsStatus.OK) //Check if request is successful.
+                                if (status == google.maps.DirectionsStatus.OK)
                                 {
                                     directionsDisplay.setMap(map);
-                                    directionsDisplay.setDirections(response);         //Display the directions result
+                                    directionsDisplay.setDirections(response);
                                     showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
                                 }
                         });
@@ -348,9 +359,13 @@
                             var contentString9 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[9] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(9,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[9] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(9,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[9] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(9,2)}</div></div><span class="stretch"></span></div>';
                             contentStrings[9] = contentString9;
                         }
-                        
+                        var totalDistance = 100;
+                        var totalDuration = 100;
                         var myRoute = directionResult.routes[0];
                         for (var i = 0; 0-i > 0-myRoute.legs.length; i++) {
+                        
+                            totalDistance += myRoute.legs[i].distance.value;
+                            totalDuration += myRoute.legs[i].duration.value;
                             var marker = new google.maps.Marker({
                             position: myRoute.legs[i].steps[0].start_point,
                             map: map,
@@ -370,6 +385,10 @@
                                 markerArray[i+1] = endMarker;
                             }
                         }
+                        totalDistance = totalDistance/1000;
+                        document.getElementById("mapComponent:refreshForm:distance").innerHTML  = totalDistance + " km";
+                        totalDuration = Math.ceil(totalDuration/60);
+                        document.getElementById("mapComponent:refreshForm:duration").innerHTML  = totalDuration + " min";
                     }
                         
                     function attachInstructionText(marker, text, contentString) {
