@@ -770,4 +770,20 @@ public class SearchBean {
         
     }
     
+    /**
+     * Builds a String for the Text To Speech feature, listing the name of all
+     * places currently on Route and returns the String
+     * @return String with all place names on route
+     */
+    public String getRouteString() {
+        String routeString = "On Route are. ";
+        
+        for (int i = 0; i < onRouteList.size(); i++) {
+            routeString += onRouteList.get(i).getName();
+            routeString += ". ";
+        }
+        
+        return routeString;
+    }
+    
 }

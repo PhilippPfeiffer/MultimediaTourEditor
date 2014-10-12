@@ -29,7 +29,10 @@
                                     <f:ajax render="refreshScript" />
                 </h:commandButton>
                 <h:panelGroup layout="block" class="speechButtonContainer">
-                    <h:commandButton id="speakButton" value="#{msg.speak}" class="speakButton" onclick="speak();">
+                    <h:commandButton id="speakDescriptionButton" value="#{msg.speakDescription}" class="speakButton" onclick="speakDescription();">
+                                    <f:ajax/>
+                </h:commandButton>
+                    <h:commandButton id="speakRouteButton" value="#{msg.speakRoute}" class="speakButton" onclick="speakRoute();">
                                     <f:ajax/>
                 </h:commandButton>
                 <h:commandButton id="stopSpeakButton" value="#{msg.stop}" class="stopSpeakButton" onclick="stop();">
@@ -404,6 +407,18 @@
                     
                     function disableSearch() {
                         document.getElementById("navComponent:form:submit").disabled=true;
+                    }
+                    
+                    function speakDescription() {
+                        meSpeak.speak("#{searchBean.getFullDescription()}", { speed: 120, wordgap: 2 });
+                        meSpeak.loadConfig("resources/js/mespeak/mespeak_config.json");
+                        meSpeak.loadVoice("resources/js/mespeak/voices/en/en.json"); 
+                    }
+            
+                    function speakRoute() {
+                        meSpeak.speak("#{searchBean.getRouteString()}", { speed: 120, wordgap: 2 });
+                        meSpeak.loadConfig("resources/js/mespeak/mespeak_config.json");
+                        meSpeak.loadVoice("resources/js/mespeak/voices/en/en.json"); 
                     }
                         
                     //]]>

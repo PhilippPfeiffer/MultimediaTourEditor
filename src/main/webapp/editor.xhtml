@@ -32,11 +32,7 @@
             
             
             
-            function speak() {
-                meSpeak.speak("#{searchBean.getFullDescription()}", { speed: 120, wordgap: 2 });
-                meSpeak.loadConfig("resources/js/mespeak/mespeak_config.json");
-                meSpeak.loadVoice("resources/js/mespeak/voices/en/en.json"); 
-            }
+            
             
             function stop() {
                 meSpeak.stop();
