@@ -23,38 +23,37 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:view locale="#{searchBean.getLocale()}">
     <h:head>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <h:outputStylesheet library="styles" name="style.css"/>
+        <meta http-equiv="content-type" content="text/html+xml;charset=utf-8" />
         <title>Multimedia Tour Editor</title>
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="resources/js/mespeak/mespeak.js" type="text/javascript"></script>
-        <script type="text/javascript" charset="utf-8" src="http://maps.googleapis.com/maps/api/js?v=3.exp?sensor=false"></script>
-        <script type="text/javascript">
-            
-            
-            
+        <script>
+//<![CDATA[
             
             
             function stop() {
                 meSpeak.stop();
             }
                     var directionsDisplay;
-                    var directionsService = new google.maps.DirectionsService();     //Create a DirectionsService object which is required to communicate with the Google Maps API Direction Service
+                    var directionsService;     //Create a DirectionsService object which is required to communicate with the Google Maps API Direction Service
                     var map;
                     var markerArray = [];
                     var stepDisplay;
                     var placeNames = [];
                     var placesAddresses = [];
                     var letters = [];
+                    var initialized = false;
                     
-                    function disableSearch() {
-                        document.getElementById("navComponent:form:submit").disabled=true;
-                    }
+            function disableSearch() {
+                document.getElementById("navComponent:form:submit").disabled=true;
+            }
+            //]]>
+            
         </script>
     </h:head>
         
-    <h:body>
-            
-            
+        <h:body>
 
         <ui:composition template="/WEB-INF/templates/editorTemplate.xhtml">
             
@@ -89,70 +88,60 @@
                         <h:panelGroup layout="block" id="onRoute0" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute0')}" >
                                 <h:graphicImage value="resources/img/letter_a.png" class="icon" />
                                 <h:commandButton id="removeFromRoute0" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(0)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(0)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute1" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute1')}" >
                                 <h:graphicImage value="resources/img/letter_b.png" class="icon" />
                                 <h:commandButton id="removeFromRoute1" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(1)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(1)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute2" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute2')}" >
                                 <h:graphicImage value="resources/img/letter_c.png" class="icon" />
                                 <h:commandButton id="removeFromRoute2" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(2)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(2)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute3" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute3')}" >
                                 <h:graphicImage value="resources/img/letter_d.png" class="icon" />
                                 <h:commandButton id="removeFromRoute3" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(3)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(3)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute4" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute4')}" >
                                 <h:graphicImage value="resources/img/letter_e.png" class="icon" />
                                 <h:commandButton id="removeFromRoute4" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(4)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(4)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute5" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute5')}" >
                                 <h:graphicImage value="resources/img/letter_f.png" class="icon" />
                                 <h:commandButton id="removeFromRoute5" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(5)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(5)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute6" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute6')}" >
                                 <h:graphicImage value="resources/img/letter_g.png" class="icon" />
                                 <h:commandButton id="removeFromRoute6" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(6)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(6)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute7" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute7')}" >
                                 <h:graphicImage value="resources/img/letter_h.png" class="icon" />
                                 <h:commandButton id="removeFromRoute7" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(7)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(7)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute8" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute8')}" >
                                 <h:graphicImage value="resources/img/letter_i.png" class="icon" />
                                 <h:commandButton id="removeFromRoute8" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(8)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(8)}" class="placeName"/>
                         </h:panelGroup>
                         <h:panelGroup layout="block" id="onRoute9" class="onRoutePlace" rendered="#{searchBean.isPlaceVisible('onRoute9')}" >
                                 <h:graphicImage value="resources/img/letter_j.png" class="icon" />
                                 <h:commandButton id="removeFromRoute9" value="#{msg.remove}" action="#{searchBean.removeFromEditorRoute(9)}" class='removeButton'>
-                                        <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                 </h:commandButton>
                                 <h:outputText value="#{searchBean.getPlaceName(9)}" class="placeName"/>
                         </h:panelGroup>
@@ -164,121 +153,101 @@
                             
                             <h:panelGroup layout="block" id="offRoute0" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute0')}" >
                                     <h:commandButton id="addToRoute0" value="#{msg.add}" action="#{searchBean.addToEditorRoute(0)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(0)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute1" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute1')}" >
                                     <h:commandButton id="addToRoute1" value="#{msg.add}" action="#{searchBean.addToEditorRoute(1)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(1)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute2" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute2')}" >
                                     <h:commandButton id="addToRoute2" value="#{msg.add}" action="#{searchBean.addToEditorRoute(2)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(2)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute3" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute3')}" >
                                     <h:commandButton id="addToRoute3" value="#{msg.add}" action="#{searchBean.addToEditorRoute(3)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(3)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute4" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute4')}" >
                                     <h:commandButton id="addToRoute4" value="#{msg.add}" action="#{searchBean.addToEditorRoute(4)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(4)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute5" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute5')}" >
                                     <h:commandButton id="addToRoute5" value="#{msg.add}" action="#{searchBean.addToEditorRoute(5)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(5)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute6" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute6')}" >
                                     <h:commandButton id="addToRoute6" value="#{msg.add}" action="#{searchBean.addToEditorRoute(6)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(6)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute7" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute7')}" >
                                     <h:commandButton id="addToRoute7" value="#{msg.add}" action="#{searchBean.addToEditorRoute(7)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(7)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute8" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute8')}" >
                                     <h:commandButton id="addToRoute8" value="#{msg.add}" action="#{searchBean.addToEditorRoute(8)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(8)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute9" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute9')}" >
                                     <h:commandButton id="addToRoute9" value="#{msg.add}" action="#{searchBean.addToEditorRoute(9)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(9)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute10" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute10')}" >
                                     <h:commandButton id="addToRoute10" value="#{msg.add}" action="#{searchBean.addToEditorRoute(10)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(10)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute11" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute11')}" >
                                     <h:commandButton id="addToRoute11" value="#{msg.add}" action="#{searchBean.addToEditorRoute(11)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(11)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute12" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute12')}" >
                                     <h:commandButton id="addToRoute12" value="#{msg.add}" action="#{searchBean.addToEditorRoute(12)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(12)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute13" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute13')}" >
                                     <h:commandButton id="addToRoute13" value="#{msg.add}" action="#{searchBean.addToEditorRoute(13)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(13)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute14" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute14')}" >
                                     <h:commandButton id="addToRoute14" value="#{msg.add}" action="#{searchBean.addToEditorRoute(141)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(14)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute15" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute15')}" >
                                     <h:commandButton id="addToRoute15" value="#{msg.add}" action="#{searchBean.addToEditorRoute(15)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(15)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute16" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute16')}" >
                                     <h:commandButton id="addToRoute16" value="#{msg.add}" action="#{searchBean.addToEditorRoute(16)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(16)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute17" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute17')}" >
                                     <h:commandButton id="addToRoute17" value="#{msg.add}" action="#{searchBean.addToEditorRoute(17)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(17)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute18" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute18')}" >
                                     <h:commandButton id="addToRoute18" value="#{msg.add}" action="#{searchBean.addToEditorRoute(18)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(18)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
                             <h:panelGroup layout="block" id="offRoute19" class="offRoutePlace" rendered="#{searchBean.isPlaceVisible('offRoute19')}" >
                                     <h:commandButton id="addToRoute19" value="#{msg.add}" action="#{searchBean.addToEditorRoute(19)}" class='addButton'>
-                                            <f:ajax render="onRouteForm :mapComponent:refreshForm:refreshScript :placeImageComponent:innerPlaceImageArea" />
                                     </h:commandButton>
                                     <h:outputText value="#{searchBean.getOffRoutePlaceName(19)}" class="placeNameOffRoute"/>
                             </h:panelGroup>
@@ -298,6 +267,406 @@
             </ui:define>
             
         </ui:composition>
+            
+            <script type="text/javascript">
+                        
+                        //<![CDATA[
+                        
+                        
+                        
+                        if(initialized == false) {
+                            loadScript();
+                        } else {initialize();}
+                        
+                        function initialize() {
+                        directionsService = new google.maps.DirectionsService();
+                        
+                        var directionsService = new google.maps.DirectionsService(); 
+                        var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});        
+                        directionsDisplay.suppressMarkers = true;
+                        var center = new google.maps.LatLng(0, 0);    
+                        var myOptions =
+                            {
+                                zoom:7,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                center: center
+                        };
+                        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                        stepDisplay = new google.maps.InfoWindow();
+                        
+                        var waypoints = [];
+                        var placeNames = [];
+                        
+                        var letters = [];
+                        letters[0] = "resources/img/letter_a.png";
+                        letters[1] = "resources/img/letter_b.png";
+                        letters[2] = "resources/img/letter_c.png";
+                        letters[3] = "resources/img/letter_d.png";
+                        letters[4] = "resources/img/letter_e.png";
+                        letters[5] = "resources/img/letter_f.png";
+                        letters[6] = "resources/img/letter_g.png";
+                        letters[7] = "resources/img/letter_h.png";
+                        letters[8] = "resources/img/letter_i.png";
+                        letters[9] = "resources/img/letter_j.png";
+                        
+                        if(#{searchBean.isPlaceVisible(onRoute0)}) {
+                            var lat0 = "#{searchBean.getPlaceLat(0)}";
+                            var lng0 = "#{searchBean.getPlaceLng(0)}";
+                            var name0 = "#{searchBean.getPlaceName(0)}";
+                            waypoints[0] = "#{searchBean.getPlaceAddress(0)}"; 
+                            placeNames[0] = name0;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute1)}) {
+                            var lat1 = "#{searchBean.getPlaceLat(1)}";
+                            var lng1 = "#{searchBean.getPlaceLng(1)}";
+                            var name1 = "#{searchBean.getPlaceName(1)}";
+                            waypoints[1] = "#{searchBean.getPlaceAddress(1)}"; 
+                            placeNames[1] = name1;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute2)}) {
+                            var lat2 = "#{searchBean.getPlaceLat(2)}";
+                            var lng2 = "#{searchBean.getPlaceLng(2)}";
+                            var name2 = "#{searchBean.getPlaceName(2)}";
+                            waypoints[2] = "#{searchBean.getPlaceAddress(2)}"; 
+                            placeNames[2] = name2;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute3)}) {
+                            var lat3 = "#{searchBean.getPlaceLat(3)}";
+                            var lng3 = "#{searchBean.getPlaceLng(3)}";
+                            var name3 = "#{searchBean.getPlaceName(3)}";
+                            waypoints[3] = "#{searchBean.getPlaceAddress(3)}"; 
+                            placeNames[3] = name3;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute4)}) {
+                            var lat4 = "#{searchBean.getPlaceLat(4)}";
+                            var lng4 = "#{searchBean.getPlaceLng(4)}";
+                            var name4 = "#{searchBean.getPlaceName(4)}";
+                            waypoints[4] = "#{searchBean.getPlaceAddress(4)}"; 
+                            placeNames[4] = name4;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute5)}) {
+                            var lat5 = "#{searchBean.getPlaceLat(5)}";
+                            var lng5 = "#{searchBean.getPlaceLng(5)}";
+                            var name5 = "#{searchBean.getPlaceName(5)}";
+                            waypoints[5] = "#{searchBean.getPlaceAddress(5)}"; 
+                            placeNames[5] = name5;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute6)}) {
+                            var lat6 = "#{searchBean.getPlaceLat(6)}";
+                            var lng6 = "#{searchBean.getPlaceLng(6)}";
+                            var name6 = "#{searchBean.getPlaceName(6)}";
+                            waypoints[6] = "#{searchBean.getPlaceAddress(6)}"; 
+                            placeNames[6] = name6;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute7)}) {
+                            var lat7 = "#{searchBean.getPlaceLat(7)}";
+                            var lng7 = "#{searchBean.getPlaceLng(7)}";
+                            var name7 = "#{searchBean.getPlaceName(7)}";
+                            waypoints[7] = "#{searchBean.getPlaceAddress(7)}"; 
+                            placeNames[7] = name7;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute8)}) {
+                            var lat8 = "#{searchBean.getPlaceLat(8)}";
+                            var lng8 = "#{searchBean.getPlaceLng(8)}";
+                            var name8 = "#{searchBean.getPlaceName(8)}";
+                            waypoints[8] = "#{searchBean.getPlaceAddress(8)}"; 
+                            placeNames[8] = name8;
+                        }
+                        if(#{searchBean.isPlaceVisible(onRoute9)}) {
+                            var lat9 = "#{searchBean.getPlaceLat(9)}";
+                            var lng9 = "#{searchBean.getPlaceLng(9)}";
+                            var name9 = "#{searchBean.getPlaceName(9)}";
+                            waypoints[9] = "#{searchBean.getPlaceAddress(9)}"; 
+                            placeNames[9] = name9;
+                        }
+                        
+                        var routeSize = "#{searchBean.getRouteSize()}";
+                        var travelMode = "#{searchBean.getTravelMode()}";
+                                                
+                        var start = waypoints[0];
+                        var end = waypoints[routeSize-1];
+                        
+                        var waypts = [];
+                        
+                        if(routeSize > 2){
+                            waypts.push({
+                                location:waypoints[1],
+                                stopover:true});
+                        }
+                        if(routeSize > 3){
+                            waypts.push({
+                                location:waypoints[2],
+                                stopover:true});
+                        }
+                        if(routeSize > 4){
+                            waypts.push({
+                                location:waypoints[3],
+                                stopover:true});
+                        }
+                        if(routeSize > 5){
+                            waypts.push({
+                                location:waypoints[4],
+                                stopover:true});
+                        }
+                        if(routeSize > 6){
+                            waypts.push({
+                                location:waypoints[5],
+                                stopover:true});
+                        }
+                        if(routeSize > 7){
+                            waypts.push({
+                                location:waypoints[6],
+                                stopover:true});
+                        }
+                        if(routeSize > 8){
+                            waypts.push({
+                                location:waypoints[7],
+                                stopover:true});
+                        }
+                        if(routeSize > 9){
+                            waypts.push({
+                                location:waypoints[8],
+                                stopover:true});
+                        }
+                        
+                        var placesAddresses = [];
+                        
+                        placesAddresses[0] = "#{searchBean.getPlaceAddress(0)}";
+                        placesAddresses[1] = "#{searchBean.getPlaceAddress(1)}";
+                        placesAddresses[2] = "#{searchBean.getPlaceAddress(2)}";
+                        placesAddresses[3] = "#{searchBean.getPlaceAddress(3)}";
+                        placesAddresses[4] = "#{searchBean.getPlaceAddress(4)}";
+                        placesAddresses[5] = "#{searchBean.getPlaceAddress(5)}";
+                        placesAddresses[6] = "#{searchBean.getPlaceAddress(6)}";
+                        placesAddresses[7] = "#{searchBean.getPlaceAddress(7)}";
+                        placesAddresses[8] = "#{searchBean.getPlaceAddress(8)}";
+                        placesAddresses[9] = "#{searchBean.getPlaceAddress(9)}";
+                        
+                        var imageArray1 = [];
+                        var imageArray2 = [];
+                        var imageArray3 = [];
+                        
+                        
+                        imageArray1[0] = "#{searchBean.getImageURL(0)}";
+                        imageArray1[1] = "#{searchBean.getImageURL(1)}";
+                        imageArray1[2] = "#{searchBean.getImageURL(2)}";
+                        imageArray1[3] = "#{searchBean.getImageURL(3)}";
+                        imageArray1[4] = "#{searchBean.getImageURL(4)}";
+                        imageArray1[5] = "#{searchBean.getImageURL(5)}";
+                        imageArray1[6] = "#{searchBean.getImageURL(6)}";
+                        imageArray1[7] = "#{searchBean.getImageURL(7)}";
+                        imageArray1[8] = "#{searchBean.getImageURL(8)}";
+                        imageArray1[9] = "#{searchBean.getImageURL(9)}";
+                        
+                        imageArray2[0] = "#{searchBean.getSecondImageURL(0)}";
+                        imageArray2[1] = "#{searchBean.getSecondImageURL(1)}";
+                        imageArray2[2] = "#{searchBean.getSecondImageURL(2)}";
+                        imageArray2[3] = "#{searchBean.getSecondImageURL(3)}";
+                        imageArray2[4] = "#{searchBean.getSecondImageURL(4)}";
+                        imageArray2[5] = "#{searchBean.getSecondImageURL(5)}";
+                        imageArray2[6] = "#{searchBean.getSecondImageURL(6)}";
+                        imageArray2[7] = "#{searchBean.getSecondImageURL(7)}";
+                        imageArray2[8] = "#{searchBean.getSecondImageURL(8)}";
+                        imageArray2[9] = "#{searchBean.getSecondImageURL(9)}";
+                        
+                        imageArray3[0] = "#{searchBean.getThirdImageURL(0)}";
+                        imageArray3[1] = "#{searchBean.getThirdImageURL(1)}";
+                        imageArray3[2] = "#{searchBean.getThirdImageURL(2)}";
+                        imageArray3[3] = "#{searchBean.getThirdImageURL(3)}";
+                        imageArray3[4] = "#{searchBean.getThirdImageURL(4)}";
+                        imageArray3[5] = "#{searchBean.getThirdImageURL(5)}";
+                        imageArray3[6] = "#{searchBean.getThirdImageURL(6)}";
+                        imageArray3[7] = "#{searchBean.getThirdImageURL(7)}";
+                        imageArray3[8] = "#{searchBean.getThirdImageURL(8)}";
+                        imageArray3[9] = "#{searchBean.getThirdImageURL(9)}";
+                        
+                        var request; 
+                        if(travelMode == "DRIVING") {
+                        request =
+                        {
+                                origin:start,
+                                destination:end,
+                                waypoints: waypts,
+                                optimizeWaypoints: false,
+                                travelMode: google.maps.DirectionsTravelMode.DRIVING         
+                            };
+                            
+                            directionsService.route(request, function(response, status)
+                        {
+                                if (status == google.maps.DirectionsStatus.OK) 
+                                {
+                                    directionsDisplay.setMap(map);
+                                    directionsDisplay.setDirections(response);        
+                                    showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
+                                }
+                        });
+                        }
+                        if(travelMode == "BICYCLING") {
+                        request =
+                        {
+                                origin:start,
+                                destination:end,
+                                waypoints: waypts,
+                                optimizeWaypoints: false,
+                                travelMode: google.maps.DirectionsTravelMode.BICYCLING         
+                            };
+                            
+                            directionsService.route(request, function(response, status)
+                        {
+                                if (status == google.maps.DirectionsStatus.OK) 
+                                {
+                                    directionsDisplay.setMap(map);
+                                    directionsDisplay.setDirections(response); 
+                                    showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
+                                }
+                        });
+                        }
+                        if(travelMode == "WALKING") {
+                        request =
+                        {
+                                origin:start,
+                                destination:end,
+                                waypoints: waypts,
+                                optimizeWaypoints: false,
+                                travelMode: google.maps.DirectionsTravelMode.WALKING          
+                            };
+                            
+                            directionsService.route(request, function(response, status)
+                        {
+                                if (status == google.maps.DirectionsStatus.OK)
+                                {
+                                    directionsDisplay.setMap(map);
+                                    directionsDisplay.setDirections(response);
+                                    showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
+                                }
+                                else if (status == google.maps.DirectionsStatus.ZERO_RESULTS)
+                                {
+                                    alert("ZERO_RESULTS");
+                                }
+                        });
+                        }
+                        
+                        
+                        
+                        function showStepsRefreshed(directionResult, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses) {
+                            var contentStrings = [];
+                        
+                        var escapeHtml = function(input) {
+                                return input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                        };
+                        
+                        imageArray1 = imageArray1.map(escapeHtml);
+                        imageArray2 = imageArray2.map(escapeHtml);
+                        imageArray3 = imageArray3.map(escapeHtml);
+                        
+                        if(routeSize >= 1){
+                        var contentString0 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[0] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(0,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[0] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(0,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[0] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(0,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[0] = contentString0;
+                        }
+                        if(routeSize >= 2){
+                            var contentString1 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[1] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(1,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[1] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(1,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[1] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(1,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[1] = contentString1;
+                        }
+                        if(routeSize >= 3){
+                            var contentString2 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[2] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(2,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[2] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(2,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[2] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(2,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[2] = contentString2;
+                        }
+                        if(routeSize >= 4){
+                            var contentString3 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[3] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(3,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[3] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(3,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[3] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(3,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[3] = contentString3;
+                        }
+                        if(routeSize >= 5){
+                            var contentString4 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[4] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(4,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[4] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(4,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[4] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(4,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[4] = contentString4;
+                        }
+                        if(routeSize >= 6){
+                            var contentString5 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[5] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(5,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[5] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(5,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[5] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(5,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[5] = contentString5;
+                        }
+                        if(routeSize >= 7){
+                            var contentString6 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[6] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(6,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[6] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(6,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[6] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(6,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[6] = contentString6;
+                        }
+                        if(routeSize >= 8){
+                            var contentString7 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[7] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(7,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[7] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(7,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[7] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(7,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[7] = contentString7;
+                        }
+                        if(routeSize >= 9){
+                            var contentString8 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[8] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(8,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[8] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(8,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[8] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(8,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[8] = contentString8;
+                        }
+                        if(routeSize >= 10){
+                            var contentString9 = '<div class="thumbnails"><div class="thumbnailContainer"><img src="'+ imageArray1[9] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(9,0)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray2[9] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(9,1)}</div></div><div class="thumbnailContainer"><img src="'+ imageArray3[9] + '" class="popUpImage" alt=""/><div class="popUpAttribution">#{searchBean.getHtmlAttributions(9,2)}</div></div><span class="stretch"></span></div>';
+                            contentStrings[9] = contentString9;
+                        }
+                        var totalDistance = 100;
+                        var totalDuration = 100;
+                        var myRoute = directionResult.routes[0];
+                        for (var i = 0; 0-i > 0-myRoute.legs.length; i++) {
+                        
+                            totalDistance += myRoute.legs[i].distance.value;
+                            totalDuration += myRoute.legs[i].duration.value;
+                            var marker = new google.maps.Marker({
+                            position: myRoute.legs[i].steps[0].start_point,
+                            map: map,
+                            icon: letters[i]
+                            });
+                            attachInstructionText(marker, "<strong>" + placeNames[i] + "</strong>" + "<br/>" + placesAddresses[i], contentStrings[i]);
+                            markerArray[i] = marker;
+                            
+                            
+                            if(i > myRoute.legs.length-2) {
+                                var endMarker = new google.maps.Marker({
+                                position: myRoute.legs[i].steps[myRoute.legs[i].steps.length-1].end_point,
+                                map: map,
+                                icon: letters[i+1]
+                                });
+                                attachInstructionText(endMarker, "<strong>" + placeNames[i+1] + "</strong>" + "<br/>" + placesAddresses[i+1],contentStrings[i+1]);
+                                markerArray[i+1] = endMarker;
+                            }
+                        }
+                        totalDistance = totalDistance/1000;
+                        document.getElementById("mapComponent:refreshForm:distance").innerHTML  = totalDistance + " km";
+                        totalDuration = Math.ceil(totalDuration/60);
+                        document.getElementById("mapComponent:refreshForm:duration").innerHTML  = totalDuration + " min";
+                    }
+                    
+                    }
+                    function attachInstructionText(marker, text, contentString) {
+                        google.maps.event.addListener(marker, 'click', function() {
+                            stepDisplay.setContent(text + " " + contentString);
+                            stepDisplay.open(map, marker);
+                        });
+                    }
+                    
+                    function disableSearch() {
+                        document.getElementById("navComponent:form:submit").disabled=true;
+                    }
+                    
+                    function speakDescription() {
+                        meSpeak.speak("#{searchBean.getFullDescription()}", { speed: 120, wordgap: 2 });
+                        meSpeak.loadConfig("resources/js/mespeak/mespeak_config.json");
+                        meSpeak.loadVoice("resources/js/mespeak/voices/en/en.json"); 
+                    }
+            
+                    function speakRoute() {
+                        meSpeak.speak("#{searchBean.getRouteString()}", { speed: 120, wordgap: 2 });
+                        meSpeak.loadConfig("resources/js/mespeak/mespeak_config.json");
+                        meSpeak.loadVoice("resources/js/mespeak/voices/en/en.json"); 
+                    }
+                    
+                    function loadScript() {
+                        var script = document.createElementNS("http://www.w3.org/1999/xhtml", "script");
+                        script.type = 'text/javascript';
+                        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&' +
+                            'callback=initialize';
+                        document.getElementsByTagName('head')[0].appendChild(script);
+                     }
+                    //]]>
+                        
+                    </script>
+            
+            
             </h:body>
         </f:view>
 </html>
