@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<div xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 
@@ -16,24 +16,28 @@
         
         <h:panelGroup layout="block" id="msg_searchError" class="validation_error hide" >#{msg.error}</h:panelGroup>
         <h:panelGroup layout="block" class="editorTitle"><h1>Multimedia Tour Editor</h1></h:panelGroup>
+        
         <h:form id="navForm" class="rightGrid">
-            <h:panelGroup layout="block" class="editorLanguageArea">
-                <h:commandButton id="german" value="Deutsch" action="#{searchBean.setGerman()}" image="resources/img/Germany.png" class="languageIcon">
-                </h:commandButton>
-                <h:commandButton id="english" value="English" action="#{searchBean.setEnglish()}" image="resources/img/UK.png" class="languageIcon">
-                </h:commandButton>
-            </h:panelGroup>  
+            
             <h:panelGroup layout="block" class="element">
                 <h:outputLabel value="#{msg.searchTerm}: "/>
             </h:panelGroup>
             <h:panelGroup layout="block" class="element">
-                <h:inputText id="searchTerm" value="#{cc.attrs.searchTerm}"/>
+                <h:inputText id="searchTerm" value="#{cc.attrs.searchTerm}" />
             </h:panelGroup>
             <h:panelGroup layout="block" class="element">
                 <h:commandButton id="submit" value="#{msg.search}" action="#{cc.attrs.action}"/>
             </h:panelGroup>
            
         </h:form>
+        <h:panelGroup layout="block" class="editorLanguageArea">
+            <h:form>
+                <h:commandButton id="german" value="Deutsch" action="#{searchBean.setGerman()}" image="resources/img/Germany.png" class="languageIcon">
+                </h:commandButton>
+                <h:commandButton id="english" value="English" action="#{searchBean.setEnglish()}" image="resources/img/UK.png" class="languageIcon">
+                </h:commandButton>    
+            </h:form>
+        </h:panelGroup>  
         
     </composite:implementation>
-</div>
+</html>

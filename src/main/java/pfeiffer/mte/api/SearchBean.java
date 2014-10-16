@@ -405,7 +405,10 @@ public class SearchBean {
         cleanSearchTerm();
         
         //The actual search for relevant places
-        placesList.setPlacesList(googlePlacesClient.textSearch(searchTerm + " Attraction", 10000));
+        //placesList.setPlacesList(googlePlacesClient.textSearch(searchTerm + " Attraction", 10000));
+        
+        double geocode[] = googlePlacesClient.geocodeAddress(searchTerm);
+        placesList.setPlacesList(googlePlacesClient.search(geocode[0],geocode[1], 10000));
         
         /*
          * If no places were found, the user is directed to the start page and

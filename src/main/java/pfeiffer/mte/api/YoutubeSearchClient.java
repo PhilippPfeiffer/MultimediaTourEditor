@@ -73,7 +73,7 @@ public class YoutubeSearchClient implements Serializable{
             
             URL url = new URL(sb.toString());
             connection = (HttpURLConnection) url.openConnection();
-            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            InputStreamReader in = new InputStreamReader(connection.getInputStream(), "UTF-8");
             
             int read;
             char[] buff = new char[1024];

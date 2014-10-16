@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<div xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:composite="http://xmlns.jcp.org/jsf/composite"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -35,8 +35,10 @@
             </h:panelGrid>
             <h:panelGroup layout="block" class="languageArea">
                 <h:commandButton id="german" value="Deutsch" action="#{searchBean.setGerman()}" image="resources/img/Germany.png" class="languageIcon">
+                    <f:ajax render="indexControlArea"/>
                 </h:commandButton>
                 <h:commandButton id="english" value="English" action="#{searchBean.setEnglish()}" image="resources/img/UK.png" class="languageIcon">
+                    <f:ajax render="indexControlArea"/>
                 </h:commandButton>
             </h:panelGroup>  
             </h:panelGroup>
@@ -45,4 +47,4 @@
         </h:form>
 
     </composite:implementation>
-</div>
+</html>

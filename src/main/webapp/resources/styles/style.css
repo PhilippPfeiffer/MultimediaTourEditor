@@ -501,8 +501,9 @@ icon {
 }
 
 .editorLanguageArea {
-    float: left;
+    float: right;
     margin-right: 10px;
+    margin-top: 14px;
 }
 
 .imageContainer {

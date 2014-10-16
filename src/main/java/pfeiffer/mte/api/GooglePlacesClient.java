@@ -48,8 +48,9 @@ import pfeiffer.mte.entities.Photo;
 public class GooglePlacesClient implements Serializable{
     
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
+    private static final String GEOCODE_API_BASE= "http://maps.googleapis.com/maps/api/geocode";
     private static final String TYPE_DETAILS = "/details";
-    private static final String TYPE_SEARCH = "/search";
+    private static final String TYPE_NEARBYSEARCH = "/nearbysearch";
     private static final String TYPE_TEXTSEARCH = "/textsearch";
     private static final String OUT_JSON = "/json";
     private static final String API_KEY = "AIzaSyCT9W_P2am39nyEdnSX13ap4ujJbLtXLU0";
@@ -82,7 +83,7 @@ public class GooglePlacesClient implements Serializable{
             
             URL url = new URL(sb.toString());
             connection = (HttpURLConnection) url.openConnection();
-            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            InputStreamReader in = new InputStreamReader(connection.getInputStream(), "UTF-8");
             
             int read;
             char[] buff = new char[1024];
@@ -111,14 +112,11 @@ public class GooglePlacesClient implements Serializable{
             placeList = new ArrayList<Place>(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
                 Place place = new Place();
-                place.setReference(predsJsonArray.getJSONObject(i).getString("reference"));
+                place.setReference(predsJsonArray.getJSONObject(i).getString("place_id"));
                 place.setIcon(predsJsonArray.getJSONObject(i).getString("icon"));
-                String name = new String(predsJsonArray.getJSONObject(i).getString("name").getBytes("ISO-8859-1"), "UTF-8");
+                String name = predsJsonArray.getJSONObject(i).getString("name");
                 name = cleanString(name);
                 place.setName(name);
-                String formattedAddress = new String(predsJsonArray.getJSONObject(i).getString("formatted_address").getBytes("ISO-8859-1"), "UTF-8");
-                formattedAddress = cleanString(formattedAddress);
-                place.setFormattedAddress(formattedAddress);
                 JSONObject geometryObject = (predsJsonArray.getJSONObject(i).getJSONObject("geometry"));
                 JSONObject locationObject = (geometryObject.getJSONObject("location"));
                 place.setLat(locationObject.getDouble("lat"));
@@ -127,9 +125,7 @@ public class GooglePlacesClient implements Serializable{
             }
         } catch (JSONException ex) {
             Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return placeList;  
     }
 
@@ -151,11 +147,11 @@ public class GooglePlacesClient implements Serializable{
              sb.append(OUT_JSON);
              sb.append("?sensor=false");
              sb.append("&key=" + API_KEY);
-             sb.append("&reference=" + URLEncoder.encode(place.getReference(), "utf8"));
+             sb.append("&placeid=" + URLEncoder.encode(place.getReference(), "utf8"));
              
               URL url = new URL(sb.toString());
-              connection = (HttpURLConnection) url.openConnection();
-             InputStreamReader in = new InputStreamReader(connection.getInputStream());
+               connection = (HttpURLConnection) url.openConnection();
+             InputStreamReader in = new InputStreamReader(connection.getInputStream(), "UTF-8");
              
              int read;
              char[] buff = new char[1024];
@@ -175,6 +171,10 @@ public class GooglePlacesClient implements Serializable{
         }
         try {
             JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
+            
+            String formattedAddress = jsonObj.getString("formatted_address");
+            formattedAddress = cleanString(formattedAddress);
+            place.setFormattedAddress(formattedAddress);
 
             JSONArray photosArray = jsonObj.getJSONArray("photos");
             
@@ -189,8 +189,6 @@ public class GooglePlacesClient implements Serializable{
                 if(attributionsArray.length() > 0) {
                     html_attributions = attributionsArray.getString(0);
                 }
-                
-                
                 
                 Photo newPhoto = new Photo();
                 newPhoto.setReference(photoReference);
@@ -219,7 +217,7 @@ public class GooglePlacesClient implements Serializable{
      * @return ArrayList<Place> of all the relevant places within the specified
      * radios of the city or region
      */
-    public static ArrayList<Place> search(String keyword, double lat, double lng, int radius) {
+    public static ArrayList<Place> search(double lat, double lng, int radius) {
         
         ArrayList<Place> placeList = null;
         HttpURLConnection connection = null;
@@ -227,17 +225,16 @@ public class GooglePlacesClient implements Serializable{
         
         try {
             StringBuilder sb = new StringBuilder(PLACES_API_BASE);
-            sb.append(TYPE_SEARCH);
+            sb.append(TYPE_NEARBYSEARCH);
             sb.append(OUT_JSON);
             sb.append("?sensor=false");
             sb.append("&key=" + API_KEY);
-            sb.append("&keyword=" + URLEncoder.encode(keyword, "utf8"));
-            sb.append("&location=" + String.valueOf(lat) + "," + String.valueOf(lng));
+            sb.append("&location=" + URLEncoder.encode(String.valueOf(lat) +","+ String.valueOf(lng), "utf8"));
             sb.append("&radius=" + String.valueOf(radius));
             
             URL url = new URL(sb.toString());
             connection = (HttpURLConnection) url.openConnection();
-            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            InputStreamReader in = new InputStreamReader(connection.getInputStream(), "UTF-8");
             
             int read;
             char[] buff = new char[1024];
@@ -266,14 +263,21 @@ public class GooglePlacesClient implements Serializable{
             placeList = new ArrayList<Place>(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
                 Place place = new Place();
-                place.setReference(predsJsonArray.getJSONObject(i).getString("reference"));
-                place.setName(predsJsonArray.getJSONObject(i).getString("name"));
+                place.setReference(predsJsonArray.getJSONObject(i).getString("place_id"));
+                place.setIcon(predsJsonArray.getJSONObject(i).getString("icon"));
+                String name = predsJsonArray.getJSONObject(i).getString("name");
+                name = cleanString(name);
+                place.setName(name);
+                JSONObject geometryObject = (predsJsonArray.getJSONObject(i).getJSONObject("geometry"));
+                JSONObject locationObject = (geometryObject.getJSONObject("location"));
+                place.setLat(locationObject.getDouble("lat"));
+                place.setLng(locationObject.getDouble("lng"));
                 placeList.add(place);
             }
         } catch (JSONException ex) {
             Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return placeList;    
+        }
+        return placeList;  
     }
     
     /**
@@ -283,7 +287,7 @@ public class GooglePlacesClient implements Serializable{
      * @param reference
      * @return Place object with detailed information
      */
-    public static Place details(String reference) {
+    public static Place details(String place_id) {
         Place place = null;
     
         HttpURLConnection connection = null;
@@ -294,7 +298,7 @@ public class GooglePlacesClient implements Serializable{
             sb.append(OUT_JSON);
             sb.append("?sensor=false");
             sb.append("&key=" + API_KEY);
-            sb.append("&reference=" + URLEncoder.encode(reference, "utf8"));
+            sb.append("&place_id=" + URLEncoder.encode(place_id, "utf8"));
 
             URL url = new URL(sb.toString());
             connection = (HttpURLConnection) url.openConnection();
@@ -322,7 +326,7 @@ public class GooglePlacesClient implements Serializable{
             JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
 
             place = new Place();
-            place.setReference(reference);
+            place.setReference(place_id);
             place.setIcon(jsonObj.getString("icon"));
             place.setName(jsonObj.getString("name"));
             place.setFormattedAddress(jsonObj.getString("formatted_address"));
@@ -346,7 +350,7 @@ public class GooglePlacesClient implements Serializable{
      * @return Place object with detailed information
      */
     public Place details(Place place) {
-        String reference = place.getReference();
+        String place_id = place.getReference();
     
         HttpURLConnection connection = null;
         StringBuilder jsonResults = new StringBuilder();
@@ -356,7 +360,7 @@ public class GooglePlacesClient implements Serializable{
             sb.append(OUT_JSON);
             sb.append("?sensor=false");
             sb.append("&key=" + API_KEY);
-            sb.append("&reference=" + URLEncoder.encode(reference, "utf8"));
+            sb.append("&place_id=" + URLEncoder.encode(place_id, "utf8"));
 
             URL url = new URL(sb.toString());
             connection = (HttpURLConnection) url.openConnection();
@@ -384,7 +388,7 @@ public class GooglePlacesClient implements Serializable{
             JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
 
             place = new Place();
-            place.setReference(reference);
+            place.setReference(place_id);
             place.setIcon(jsonObj.getString("icon"));
             place.setName(jsonObj.getString("name"));
             place.setFormattedAddress(jsonObj.getString("formatted_address"));
@@ -405,9 +409,64 @@ public class GooglePlacesClient implements Serializable{
      */
     private static String cleanString(String string) {
         string = string.replaceAll("\"", "");
-        string = string.replaceAll("ß", "ss");
         
         return string;
+    }
+    
+    public double[] geocodeAddress(String address) {
+        
+        double geocode[] = new double[] {0.0,0.0};
+        
+        HttpURLConnection connection = null;
+        StringBuilder jsonResults = new StringBuilder();
+        
+        try {
+            StringBuilder sb = new StringBuilder(GEOCODE_API_BASE);
+            sb.append(OUT_JSON);
+            sb.append("?sensor=false");
+            sb.append("&address=" + URLEncoder.encode(address, "utf8"));
+            
+            URL url = new URL(sb.toString());
+            connection = (HttpURLConnection) url.openConnection();
+            InputStreamReader in = new InputStreamReader(connection.getInputStream(), "UTF-8");
+            
+            int read;
+            char[] buff = new char[1024];
+            while ((read = in.read(buff)) != -1) {
+                jsonResults.append(buff, 0, read);
+            }
+            
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+        
+        try {
+            // Create a JSON object hierarchy from the results
+            JSONObject jsonObj = new JSONObject(jsonResults.toString());
+
+            // Extract the Place descriptions from the results
+                
+            JSONArray predsJsonArray = jsonObj.getJSONArray("results");
+            JSONObject resultObject = predsJsonArray.getJSONObject(0);
+            
+                JSONObject geometryObject = (resultObject.getJSONObject("geometry"));
+                JSONObject locationObject = (geometryObject.getJSONObject("location"));
+                geocode[0] = locationObject.getDouble("lat");
+                geocode[1] = locationObject.getDouble("lng");
+            
+        } catch (JSONException ex) {
+            Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return geocode;
     }
     
     
