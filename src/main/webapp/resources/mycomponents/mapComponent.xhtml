@@ -276,6 +276,10 @@
                                     directionsDisplay.setDirections(response);        
                                     showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
                                 }
+                                else if (status == google.maps.DirectionsStatus.ZERO_RESULTS)
+                                {
+                                    alert("One of the places could not be added to the route by Google Maps. Try a different travel method or removing the place from the route.");
+                                }
                         });
                         }
                         if(travelMode == "BICYCLING") {
@@ -295,6 +299,10 @@
                                     directionsDisplay.setMap(map);
                                     directionsDisplay.setDirections(response); 
                                     showStepsRefreshed(response, routeSize, imageArray1, imageArray2, imageArray3, placesAddresses);
+                                }
+                                else if (status == google.maps.DirectionsStatus.ZERO_RESULTS)
+                                {
+                                    alert("One of the places could not be added to the route by Google Maps. Try a different travel method or removing the place from the route.");
                                 }
                         });
                         }
@@ -318,7 +326,7 @@
                                 }
                                 else if (status == google.maps.DirectionsStatus.ZERO_RESULTS)
                                 {
-                                    alert("ZERO_RESULTS");
+                                    alert("One of the places could not be added to the route by Google Maps. Try a different travel method or removing the place from the route.");
                                 }
                         });
                         }
