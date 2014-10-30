@@ -50,7 +50,7 @@ public class FreebaseSearchClient {
      * @param wiki
      * @return Wiki Object with found data
      */
-    public Wiki search(String searchTerm, Wiki wiki) {
+    public Wiki search(String searchTerm, Wiki wiki, String locale) {
     try {
       HttpTransport httpTransport = new NetHttpTransport();
       HttpRequestFactory requestFactory = httpTransport.createRequestFactory();
@@ -63,7 +63,13 @@ public class FreebaseSearchClient {
       url.put("indent", "true");
       url.put("filter", "(all type:/location/citytown type:/location/location type:/common/topic)");
       url.put("output", "(/location/location/area /common/topic/description /location/statistical_region/population /location/location/containedby)");
-      url.put("lang", "d/en");
+      if(locale.equals("EN")) {
+          url.put("lang", "d/en");
+      } else if(locale.equals("DE")) {
+          url.put("lang", "d/de");
+      } else {
+          url.put("lang", "d/en");
+      }
       url.put("key", FreebaseSearchClient.API_KEY);
       
       HttpRequest request = requestFactory.buildGetRequest(url);
@@ -84,29 +90,29 @@ public class FreebaseSearchClient {
           org.json.JSONArray populationArray = populationObj.getJSONArray("/location/statistical_region/population");
           String population = populationArray.getJSONObject(0).getString("value");
           String populationDate = populationArray.getJSONObject(0).getString("date");
-          wiki.setPopulation(population);
-          wiki.setPopulationDate(populationDate);
+          wiki.setPopulation(population, locale);
+          wiki.setPopulationDate(populationDate, locale);
       } catch (Exception ex) {
-        wiki.setPopulation("No data found");
-        wiki.setPopulationDate("");
+        wiki.setPopulation("No data found", locale);
+        wiki.setPopulationDate("", locale);
         Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.INFO, null, ex);
       }
       
       try{
           org.json.JSONArray areaArray = areaObj.getJSONArray("/location/location/area");
           String area = areaArray.getString(0);
-          wiki.setArea(area);
+          wiki.setArea(area, locale);
       } catch (Exception ex) {
-        wiki.setArea("No data found");
+        wiki.setArea("No data found", locale);
         Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.INFO, null, ex);
       }
       
       try{
           org.json.JSONArray containedByArray = containedByObj.getJSONArray("/location/location/containedby");
           String containedBy = containedByArray.getJSONObject(0).getString("name");
-          wiki.setCountry(containedBy);
+          wiki.setCountry(containedBy, locale);
       } catch (Exception ex) {
-        wiki.setCountry("No data found");
+        wiki.setCountry("No data found", locale);
         Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.INFO, null, ex);
       }
       
@@ -115,9 +121,9 @@ public class FreebaseSearchClient {
           String description = descriptionArray.getString(0);
           description = description.replaceAll("\n", "");
           description = description.replaceAll("\"", "");
-          wiki.setDescription(description, true);
+          wiki.setDescription(description, true, locale);
       } catch (Exception ex) {
-        wiki.setDescription("No data found", false);
+        wiki.setDescription("No data found", false, locale);
         Logger.getLogger(GooglePlacesClient.class.getName()).log(Level.INFO, null, ex);
       }
      

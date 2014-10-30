@@ -279,7 +279,7 @@ public class SearchBean {
      * @return String of the country
      */
     public String getCountry() {
-        return wiki.getCountry();
+        return wiki.getCountry(locale);
     }
     
     /**
@@ -287,7 +287,7 @@ public class SearchBean {
      * @return String of the area
      */
     public String getArea() {
-        return wiki.getArea();
+        return wiki.getArea(locale);
     }
     
     /**
@@ -295,7 +295,7 @@ public class SearchBean {
      * @return String of the population
      */
     public String getPopulation() {
-        return wiki.getPopulation();
+        return wiki.getPopulation(locale);
     }
     
     /**
@@ -303,7 +303,7 @@ public class SearchBean {
      * @return String of the description
      */
     public String getDescription() {
-        return wiki.getDescription();
+        return wiki.getDescription(locale);
     }
     
     /**
@@ -311,7 +311,7 @@ public class SearchBean {
      * @return String of the population date
      */
     public String getPopulationDate() {
-        return wiki.getPopulationDate();
+        return wiki.getPopulationDate(locale);
     }
     
     /**
@@ -408,7 +408,7 @@ public class SearchBean {
         //placesList.setPlacesList(googlePlacesClient.textSearch(searchTerm + " Attraction", 10000));
         
         double geocode[] = googlePlacesClient.geocodeAddress(searchTerm);
-        placesList.setPlacesList(googlePlacesClient.search(geocode[0],geocode[1], 10000));
+        placesList.setPlacesList(googlePlacesClient.search(geocode[0],geocode[1], 2500));
         
         /*
          * If no places were found, the user is directed to the start page and
@@ -431,7 +431,8 @@ public class SearchBean {
         videoList.setList(youtubeSearchClient.search(searchTerm));
        
         //Relevant wiki information is searched for
-        wiki = freebaseSearchClient.search(searchTerm, wiki);
+        wiki = freebaseSearchClient.search(searchTerm, wiki, "EN");
+        wiki = freebaseSearchClient.search(searchTerm, wiki, "DE");
         
         //The user is directed to the editor view
         return "editor";
@@ -706,10 +707,10 @@ public class SearchBean {
      * @return a boolean
      */
     public boolean descriptionAvailable() {
-        if(wiki.getDescription() == null) {
+        if(wiki.getDescription(locale) == null) {
             return false;
         }
-        if(wiki.getDescription().length() > 0) {
+        if(wiki.getDescription(locale).length() > 0) {
             return true;
         } else return false;
     }
@@ -722,7 +723,7 @@ public class SearchBean {
         if(!descriptionAvailable()) {
             return "";
         }
-        return wiki.getFullDescription();
+        return wiki.getFullDescription(locale);
     }
     
     /**

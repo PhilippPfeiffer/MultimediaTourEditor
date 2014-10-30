@@ -25,97 +25,162 @@ package pfeiffer.mte.entities;
  */
 public class Wiki {
     
-    private String area;
-    private String country;
-    private String population;
-    private String description;
-    private String fullDescription;
-    private String populationDate;
+    int shortenLength = 300;
+    
+    private String area_EN;
+    private String country_EN;
+    private String population_EN;
+    private String description_EN;
+    private String fullDescription_EN;
+    private String populationDate_EN;
+    private String area_DE;
+    private String country_DE;
+    private String population_DE;
+    private String description_DE;
+    private String fullDescription_DE;
+    private String populationDate_DE;
     
     /**
      * Sets the description as a String and shortens it down, if the shorten
      * parameter is true.
      * @param description
      * @param shorten 
+     * @param locale
      */
-    public void setDescription(String description, boolean shorten) {
-        this.fullDescription = description;
-        if(shorten) {
-            description = shortenWikiText(description,300);
+    public void setDescription(String description, boolean shorten, String locale) {
+        if(locale.equals("EN")) {
+            this.fullDescription_EN = description;
+            if(shorten) {
+                description = shortenWikiText(description, shortenLength);
+            }
+            this.description_EN = description;
+        } else if(locale.equals("DE")) {
+            this.fullDescription_DE = description;
+            if(shorten) {
+                description = shortenWikiText(description, shortenLength);
+            }
+            this.description_DE = description;
         }
-        this.description = description;
+        
     }
     
     /**
      * Returns the description.
+     * @param locale
      * @return String of the description
      */
-    public String getDescription() {
-        return description;
+    public String getDescription(String locale) {
+        if(locale.equals("EN")) {
+            return description_EN;
+        } else if(locale.equals("DE")) {
+            return description_DE;
+        } else return "No Data Found.";
+        
     }
     
     /**
      * Sets the population date.
      * @param populationDate 
+     * @param locale
      */
-    public void setPopulationDate(String populationDate) {
-        this.populationDate = populationDate;
+    public void setPopulationDate(String populationDate, String locale) {
+        if(locale.equals("EN")) {
+            this.populationDate_EN = populationDate;
+        } else if(locale.equals("DE")) {
+            this.populationDate_DE = populationDate;
+        }
+        
     }
     
     /**
      * Returns the population date
+     * @param locale
      * @return String of the population date
      */
-    public String getPopulationDate() {
-        return populationDate;
+    public String getPopulationDate(String locale) {
+        if(locale.equals("EN")) {
+            return populationDate_EN;
+        } else if(locale.equals("DE")) {
+            return populationDate_DE;
+        } else return "No Data Found.";
     }
     
     /**
      * Sets the area.
      * @param area 
+     * @param locale
      */
-    public void setArea(String area) {
-        this.area = area;
+    public void setArea(String area, String locale) {
+        if(locale.equals("EN")) {
+            this.area_EN = area;
+        } else if(locale.equals("DE")) {
+            this.area_DE = area;
+        }
     }
     
     /**
      * Returns the area.
+     * @param locale
      * @return String of the area
      */
-    public String getArea() {
-        return area;
+    public String getArea(String locale) {
+        if(locale.equals("EN")) {
+            return area_EN;
+        } else if(locale.equals("DE")) {
+            return area_DE;
+        } else return "No Data Found.";
     }
     
     /**
      * Sets the country.
-     * @param country 
+     * @param country
+     * @param locale
      */
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountry(String country, String locale) {
+        if(locale.equals("EN")) {
+            this.country_EN = country;
+        } else if(locale.equals("DE")) {
+            this.country_DE = country;
+        }
     }
     
     /**
      * Returns the country.
+     * @param locale
      * @return String of the country
      */
-    public String getCountry() {
-        return country;
+    public String getCountry(String locale) {
+        if(locale.equals("EN")) {
+            return country_EN;
+        } else if(locale.equals("DE")) {
+            return country_DE;
+        } else return "No Data Found";
     }
     
     /**
      * Sets the population
+     * @param locale
      * @param population 
      */
-    public void setPopulation(String population) {
-        this.population = population;
+    public void setPopulation(String population, String locale) {
+        if(locale.equals("EN")) {
+            this.populationDate_EN = population;
+        } else if(locale.equals("DE")) {
+            this.populationDate_DE = population;
+        }
     }
     
     /**
      * Returns the population
+     * @param locale
      * @return String of the population
      */
-    public String getPopulation() {
-        return population;
+    public String getPopulation(String locale) {
+        if(locale.equals("EN")) {
+            return population_EN;
+        } else if(locale.equals("DE")) {
+            return population_DE;
+        } else return "No Data Found";
     }
     
     /**
@@ -132,9 +197,14 @@ public class Wiki {
     
     /**
      * Returns the full, unshortened Description
+     * @param locale
      * @return String of full Description
      */
-    public String getFullDescription() {
-        return fullDescription;
+    public String getFullDescription(String locale) {
+        if(locale.equals("EN")) {
+            return fullDescription_EN;
+        } else if(locale.equals("DE")) {
+            return fullDescription_DE;
+        } else return "No Data Found";
     }
 }
